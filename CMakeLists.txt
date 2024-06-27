@@ -4,3 +4,10 @@ project(cpp_module_00)
 set(CMAKE_CXX_STANDARD 98)
 
 add_executable(megaphone ex00/megaphone.cpp)
+
+add_executable(phonebook
+        ex01/main.cpp
+        ex01/PhoneBook.cpp
+        ex01/PhoneBook.hpp
+        ex01/Contact.cpp
+        ex01/Contact.hpp)
