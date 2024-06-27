@@ -11,3 +11,8 @@ add_executable(phonebook
         ex01/PhoneBook.hpp
         ex01/Contact.cpp
         ex01/Contact.hpp)
+
+add_executable(dream
+        ex02/tests.cpp
+        ex02/Account.cpp
+        ex02/Account.hpp)
