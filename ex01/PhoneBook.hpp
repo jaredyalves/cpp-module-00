@@ -5,7 +5,8 @@
 
 #define CONTACTS_MAX 8
 
-class PhoneBook {
+class PhoneBook
+{
 private:
     int _size;
     int _last_index;
@@ -18,9 +19,9 @@ public:
 
     bool empty() const;
 
-    Contact *contacts();
+    Contact* contacts();
 
-    void add(const Contact &contact);
+    void add(const Contact& contact);
 };
 
 #endif //PHONEBOOK_HPP
