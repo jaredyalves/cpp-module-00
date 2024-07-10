@@ -7,21 +7,28 @@
 
 class PhoneBook
 {
-private:
-    int _size;
-    int _last_index;
-    Contact _contacts[CONTACTS_MAX];
-
 public:
-    PhoneBook();
+	int	 size() const;
+	bool isEmpty() const;
+	void add(const Contact& contact);
 
-    int size() const;
+	std::string getFirstName(int idx) const;
+	void		setFirstName(int idx, const std::string& first_name);
+	std::string getLastName(int idx) const;
+	void		setLastName(int idx, const std::string& last_name);
+	std::string getNickname(int idx) const;
+	void		setNickname(int idx, const std::string& nickname);
+	std::string getPhoneNumber(int idx) const;
+	void		setPhoneNumber(int idx, const std::string& phone_number);
+	std::string getDarkestSecret(int idx) const;
+	void		setDarkestSecret(int idx, const std::string& darkest_secret);
 
-    bool empty() const;
+	PhoneBook();
 
-    Contact* contacts();
-
-    void add(const Contact& contact);
+private:
+	Contact _contacts[CONTACTS_MAX];
+	int		_contacts_size;
+	int		_contacts_last_index;
 };
 
-#endif //PHONEBOOK_HPP
+#endif // PHONEBOOK_HPP

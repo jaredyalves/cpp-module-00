@@ -1,151 +1,154 @@
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
+
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 
-#include "Contact.hpp"
-#include "PhoneBook.hpp"
-
 static void add_contact(PhoneBook& phonebook)
 {
-    std::string input;
-    Contact contact;
+	std::string input;
+	Contact		contact;
 
-    while (input.empty() && !std::cin.eof())
-    {
-        std::cout << "Enter the contact's first name: ";
-        if (std::getline(std::cin, input) && !input.empty())
-            contact.set_first_name(input);
-    }
+	while (input.empty() && !std::cin.eof())
+	{
+		std::cout << "Enter the contact's first name: ";
+		if (std::getline(std::cin, input) && !input.empty())
+			contact.setFirstName(input);
+	}
 
-    input = "";
-    while (input.empty() && !std::cin.eof())
-    {
-        std::cout << "Enter the contact's last name: ";
-        if (std::getline(std::cin, input) && !input.empty())
-            contact.set_last_name(input);
-    }
+	input = "";
+	while (input.empty() && !std::cin.eof())
+	{
+		std::cout << "Enter the contact's last name: ";
+		if (std::getline(std::cin, input) && !input.empty())
+			contact.setLastName(input);
+	}
 
-    input = "";
-    while (input.empty() && !std::cin.eof())
-    {
-        std::cout << "Enter the contact's nickname: ";
-        if (std::getline(std::cin, input) && !input.empty())
-            contact.set_nickname(input);
-    }
+	input = "";
+	while (input.empty() && !std::cin.eof())
+	{
+		std::cout << "Enter the contact's nickname: ";
+		if (std::getline(std::cin, input) && !input.empty())
+			contact.setNickname(input);
+	}
 
-    input = "";
-    while (input.empty() && !std::cin.eof())
-    {
-        std::cout << "Enter the contact's phone number: ";
-        if (std::getline(std::cin, input) && !input.empty())
-            contact.set_phone_number(input);
-    }
+	input = "";
+	while (input.empty() && !std::cin.eof())
+	{
+		std::cout << "Enter the contact's phone number: ";
+		if (std::getline(std::cin, input) && !input.empty())
+			contact.setPhoneNumber(input);
+	}
 
-    input = "";
-    while (input.empty() && !std::cin.eof())
-    {
-        std::cout << "Enter the contact's darkest secret: ";
-        if (std::getline(std::cin, input) && !input.empty())
-            contact.set_darkest_secret(input);
-    }
+	input = "";
+	while (input.empty() && !std::cin.eof())
+	{
+		std::cout << "Enter the contact's darkest secret: ";
+		if (std::getline(std::cin, input) && !input.empty())
+			contact.setDarkestSecret(input);
+	}
 
-    if (!std::cin.eof())
-    {
-        phonebook.add(contact);
-        std::cout << "Contact added.\n";
-    }
+	if (!std::cin.eof())
+	{
+		phonebook.add(contact);
+		std::cout << "Contact added.\n";
+	}
 }
 
 static void display_contacts(PhoneBook& phonebook)
 {
-    std::cout << "|" << std::setw(10) << "Index" << "|" << std::setw(10) << "First Name" << "|" << std::setw(10)
-        << "Last Name" << "|" << std::setw(10) << "Nickname" << "|" << std::endl;
+	std::cout << "|" << std::setw(10) << "Index" << "|" << std::setw(10)
+			  << "First Name" << "|" << std::setw(10) << "Last Name" << "|"
+			  << std::setw(10) << "Nickname" << "|" << std::endl;
 
-    for (int i = 0; i < phonebook.size(); ++i)
-    {
-        const Contact& contact = phonebook.contacts()[i];
-        std::cout << "|" << std::setw(10) << i + 1 << "|"
-            << std::setw(10) << (contact.get_first_name().size() > 10
-                                     ? contact.get_first_name().substr(0, 9) + "."
-                                     : contact.get_first_name()) << "|"
-            << std::setw(10) << (contact.get_last_name().size() > 10
-                                     ? contact.get_last_name().substr(0, 9) + "."
-                                     : contact.get_last_name()) << "|"
-            << std::setw(10) << (contact.get_nickname().size() > 10
-                                     ? contact.get_nickname().substr(0, 9) + "."
-                                     : contact.get_nickname()) << "|" << std::endl;
-    }
+	for (int i = 0; i < phonebook.size(); ++i)
+		std::cout << "|" << std::setw(10) << i + 1 << "|" << std::setw(10)
+				  << (phonebook.getFirstName(i).size() > 10
+							 ? phonebook.getFirstName(i).substr(0, 9) + "."
+							 : phonebook.getFirstName(i))
+				  << "|" << std::setw(10)
+				  << (phonebook.getLastName(i).size() > 10
+							 ? phonebook.getLastName(i).substr(0, 9) + "."
+							 : phonebook.getLastName(i))
+				  << "|" << std::setw(10)
+				  << (phonebook.getNickname(i).size() > 10
+							 ? phonebook.getNickname(i).substr(0, 9) + "."
+							 : phonebook.getNickname(i))
+				  << "|" << std::endl;
 }
 
 static void search_contact(PhoneBook& phonebook)
 {
-    int index;
+	int index;
 
-    if (phonebook.empty())
-    {
-        std::cout << "No contacts available." << std::endl;
-        return;
-    }
+	if (phonebook.isEmpty())
+	{
+		std::cout << "No contacts available." << std::endl;
+		return;
+	}
 
-    display_contacts(phonebook);
+	display_contacts(phonebook);
 
-    while (true)
-    {
-        std::string input;
-        std::istringstream iss;
+	while (true)
+	{
+		std::string		   input;
+		std::istringstream iss;
 
-        std::cout << "Enter the index of the contact to display: ";
-        std::getline(std::cin, input);
+		std::cout << "Enter the index of the contact to display: ";
+		std::getline(std::cin, input);
 
-        if (std::cin.eof())
-            return;
+		if (std::cin.eof())
+			return;
 
-        if (input.empty())
-        {
-            std::cout << "Invalid index. Please try again." << std::endl;
-            continue;
-        }
+		if (input.empty())
+		{
+			std::cout << "Invalid index. Please try again." << std::endl;
+			continue;
+		}
 
-        iss.clear();
-        iss.str(input);
+		iss.clear();
+		iss.str(input);
 
-        if (iss >> index)
-            if (index >= 1 && index <= phonebook.size())
-                break;
-        std::cout << "Invalid index. Please try again." << std::endl;
-    }
+		if (iss >> index)
+			if (index >= 1 && index <= phonebook.size())
+				break;
+		std::cout << "Invalid index. Please try again." << std::endl;
+	}
 
-    const Contact& contact = phonebook.contacts()[index - 1];
-    std::cout << "First Name: " << contact.get_first_name() << std::endl;
-    std::cout << "Last Name: " << contact.get_last_name() << std::endl;
-    std::cout << "Nickname: " << contact.get_nickname() << std::endl;
-    std::cout << "Phone Number: " << contact.get_phone_number() << std::endl;
-    std::cout << "Darkest Secret: " << contact.get_darkest_secret() << std::endl;
+	int i = index - 1;
+	std::cout << "First Name: " << phonebook.getFirstName(i) << std::endl
+			  << "Last Name: " << phonebook.getLastName(i) << std::endl
+			  << "Nickname: " << phonebook.getNickname(i) << std::endl
+			  << "Phone Number: " << phonebook.getPhoneNumber(i) << std::endl
+			  << "Darkest Secret: " << phonebook.getDarkestSecret(i)
+			  << std::endl;
 }
 
 int main()
 {
-    PhoneBook phonebook;
+	PhoneBook phonebook;
 
-    std::cout << "Welcome to the PhoneBook!" << std::endl;
-    std::cout << "Please enter one of the following commands: ADD, SEARCH or EXIT." << std::endl;
+	std::cout << "Welcome to the PhoneBook!" << std::endl;
+	std::cout
+		<< "Please enter one of the following commands: ADD, SEARCH or EXIT."
+		<< std::endl;
 
-    while (true)
-    {
-        std::string input;
+	while (true)
+	{
+		std::string input;
 
-        std::cout << "Enter command: ";
-        std::getline(std::cin, input);
+		std::cout << "Enter command: ";
+		std::getline(std::cin, input);
 
-        if (input == "ADD")
-            add_contact(phonebook);
-        else if (input == "SEARCH")
-            search_contact(phonebook);
-
-        if (input == "EXIT" || std::cin.eof())
-        {
-            std::cout << "Exiting... Goodbye!" << std::endl;
-            break;
-        }
-    }
+		if (input == "ADD")
+			add_contact(phonebook);
+		else if (input == "SEARCH")
+			search_contact(phonebook);
+		if (input == "EXIT" || std::cin.eof())
+		{
+			std::cout << "Exiting... Goodbye!" << std::endl;
+			break;
+		}
+	}
 }
